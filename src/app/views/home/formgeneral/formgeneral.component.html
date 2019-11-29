@@ -7,70 +7,99 @@
     <mat-grid-tile>
       <mat-card>
         <mat-form-field>
-          <input matInput  placeholder="$key">
+          <input matInput placeholder="$key">
           <mat-error>
             El campo<strong>cedula</strong> es <strong>necesario</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="idEstudiante"  placeholder="Id Estudiante">
+          <input matInput formControlName="idEstudiante" placeholder="Id Estudiante">
           <mat-error>
             El campo<strong>id estudiante</strong> es <strong>necesario</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput (keyup)="onKey($event)" [(ngModel)]="cedulaBuscar.cedula" placeholder="Cedula" >
+          <input matInput formControlName="cedula" (keyup)="onKey($event)" [(ngModel)]="cedulaBuscar.cedula"
+            placeholder="Cedula">
           <mat-error>
             El campo<strong>cedula</strong> es <strong>necesario</strong>
           </mat-error>
         </mat-form-field>
-        <mat-form-field>
-            <input matInput  placeholder="Nombre" value="{{person.nombre}}" disabled>
-            <mat-error>
-              El campo<strong>Nombre</strong> es <strong>necesario</strong>
-            </mat-error>
-          </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="apellido" disabled>
-          <mat-error>
-            El campo<strong>apellido</strong> es <strong>necesario</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="direccion">
-          <mat-error>
-            El campo<strong>direccion</strong> es <strong>necesario</strong>
-          </mat-error>
-        </mat-form-field>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center">
+              Nombre
+            </div>
+            <div class="hijo2 text-center">
+              <h2>{{person.nombre}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center">
+              Apellido
+            </div>
+            <div class="hijo2 text-center">
+              <h2>{{person.apellido}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center">
+              Direccion
+            </div>
+            <div class="hijo2 text-center">
+              <h2>{{person.direccion}}</h2>
+            </div>
+          </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-card>
-        <mat-label>Genero: </mat-label>
-        <br>
-        <mat-radio-group aria-label="Select an option">
-          <mat-radio-button value="M">Masculino</mat-radio-button>
-          <mat-radio-button value="F">Femenino</mat-radio-button>
-        </mat-radio-group>
-        <mat-form-field>
-          <input matInput placeholder="fecha">
-          <mat-error>
-            El campo<strong>fecha</strong> es <strong>necesario</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="fecha completa de nacimiento del estudiante">
-          <mat-error>
-            El campo<strong>fecha completa del estudiante</strong> es <strong>necesario</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Estado">
-          <mat-error>
-            El campo<strong>Estado</strong> es <strong>necesario</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-fab color="primary" >Add</button>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center color-white">
+              Genero
+            </div>
+            <div class="hijo2 text-center">
+              <h2>{{person.genero}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center ">
+              Fecha Nacimiento
+            </div>
+            <div class="hijo2 text-center">
+              <h2>{{person.fechaN}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center color-white">
+              Fecha de nacimeinto Exacta
+            </div>
+            <div class="hijo2 text-center">
+              <h2>en proceso...</h2>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="caja">
+            <div class="hijo text-center color-white">
+              Estado
+            </div>
+            <div class="hijo2 text-center">
+              <h2>{{person.estado}}</h2>
+            </div>
+          </div>
+        </div>
+        <button #onOffButton class="btn btn-primary">Add</button>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
@@ -149,7 +178,9 @@
     <h1 class="mat-h1">Examen Fisico</h1>
     <mat-divider fxFlex="10"></mat-divider>
   </div>
-  <mat-label><h6>Ubicacion de Daño</h6></mat-label>
+  <mat-label>
+    <h6>Ubicacion de Daño</h6>
+  </mat-label>
   <br>
   <mat-radio-group aria-label="Select an option">
     <mat-radio-button value="cabeza">Cabeza</mat-radio-button>
@@ -209,7 +240,7 @@
     </mat-error>
   </mat-form-field>
   <div class="row p-5">
-      <button class="border-left-5" mat-fab color="primary" type="submit" [disabled]="form.invalid">Submit</button>
-      <button class="border-5" mat-fab color="warn">Clear</button>
+    <button class="border-left-5" mat-fab color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+    <button class="border-5" mat-fab color="warn">Clear</button>
   </div>
 </form>

@@ -8,6 +8,7 @@ export class Validatorsgeneral {
     form = new FormGroup({
         $key: new FormControl(null),
         idEstudiante: new FormControl('', Validators.required),
+        cedula: new FormControl('', Validators.required),
         grupoSanguineo: new FormControl('', Validators.required)
 
       });
@@ -18,6 +19,7 @@ export class Validatorsgeneral {
         this.form.setValue({
           $key: null,
           idEstudiante: '',
+          cedula: '',
           grupoSanguineo: ''
         });
       }

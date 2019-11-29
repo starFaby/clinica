@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, AfterViewInit } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
 
 import { Estudiante } from 'src/app/models/estudiante';
@@ -15,11 +15,13 @@ import { EstudianteComponent } from '../estudiante/estudiante.component';
   templateUrl: './formgeneral.component.html',
   styleUrls: ['./formgeneral.component.css']
 })
-export class FormgeneralComponent implements OnInit {
+export class FormgeneralComponent implements AfterViewInit, OnInit {
+ 
   private contador = 0;
   private encontrado = false;
   arregloEstudiante: Estudiante[];
   cie10Selected: Cie10[];
+  @ViewChild('onOffButton', { static: false }) onOffButton1: ElementRef;
   cedulaBuscar: any = {
     cedula: ''
   };
@@ -47,14 +49,27 @@ export class FormgeneralComponent implements OnInit {
   constructor(private estudianteService: EstudianteService,
               private cie10Service: Cie10Service,
               private generalService: GeneralService,
-              private validatorsgeneral: Validatorsgeneral) { }
+              private validatorsgeneral: Validatorsgeneral,
+              private renderer: Renderer2) { }
   form = this.validatorsgeneral.form;
   ngOnInit() {
     this.getEstudiantes();
     this.getCie10();
     this.getGeneral();
   }
+  ngAfterViewInit() {
+      this.offButton();
+  }
 
+  // DOM
+  offButton() {
+    this.renderer.setAttribute(this.onOffButton1.nativeElement, 'disabled', 'true');
+  }
+  onButton() {
+    this.renderer.removeAttribute(this.onOffButton1.nativeElement, 'disabled');
+  }
+
+  // service
   getGeneral() {
     this.generalService.getGenerals();
   }
@@ -62,6 +77,7 @@ export class FormgeneralComponent implements OnInit {
     this.contador = event.target.value.length;
     if (this.contador !== 10) {
       console.log('Cedula Invalida');
+      this.onButton();
     } else {
       console.log('Cedula valida');
       // tslint:disable-next-line:prefer-for-of
@@ -73,9 +89,20 @@ export class FormgeneralComponent implements OnInit {
           this.person.apellido = this.arregloEstudiante[i].apellido;
           this.person.direccion = this.arregloEstudiante[i].direccion;
           this.person.genero = this.arregloEstudiante[i].genero;
+          if (this.person.genero === 'F') {
+            this.person.genero = 'Mujer';
+          } else if (this.person.genero === 'M') {
+            this.person.genero = 'Hombre';
+          }
           this.person.fechaN = this.arregloEstudiante[i].fechaN;
           this.person.estado = this.arregloEstudiante[i].estado;
+          if (this.person.estado === '0') {
+            this.person.estado = 'Inactivo';
+          } else if (this.person.estado === '1') {
+            this.person.estado = 'Activo';
+          }
           console.log(this.arregloEstudiante[i].cedula);
+          this.offButton();
           break;
         }
         if (this.arregloEstudiante[i].cedula !== this.cedulaBuscar.cedula) {
@@ -137,7 +164,7 @@ export class FormgeneralComponent implements OnInit {
       this.cie10Selected = [];
       item.forEach(element => {
         let x = element.payload.toJSON();
-        x["$key"] = element.key;
+        x['$key'] = element.key;
         this.cie10Selected.push(x as Cie10);
       });
     });
