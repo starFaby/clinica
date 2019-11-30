@@ -20,7 +20,6 @@ export class Formcie10Component implements OnInit {
   form = this.validatorscie10.form;
 
   ngOnInit() {
-
   }
   onReset() {
     this.validatorscie10.form.reset();
@@ -54,5 +53,6 @@ export class Formcie10Component implements OnInit {
     matDialogRef.width = '10px';
     this.dialog.open(Formcie10Component, matDialogRef);
   }
+
 
 }

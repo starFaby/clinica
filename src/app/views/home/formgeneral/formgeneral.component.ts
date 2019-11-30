@@ -16,12 +16,13 @@ import { EstudianteComponent } from '../estudiante/estudiante.component';
   styleUrls: ['./formgeneral.component.css']
 })
 export class FormgeneralComponent implements AfterViewInit, OnInit {
- 
+
   private contador = 0;
   private encontrado = false;
   arregloEstudiante: Estudiante[];
-  cie10Selected: Cie10[];
+  arregloCie10: Cie10[];
   @ViewChild('onOffButton', { static: false }) onOffButton1: ElementRef;
+  @ViewChild('onOffButtonCie10', { static: false }) onOffButtonCie101: ElementRef;
   cedulaBuscar: any = {
     cedula: ''
   };
@@ -47,10 +48,10 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
   /***************************************************/
 
   constructor(private estudianteService: EstudianteService,
-              private cie10Service: Cie10Service,
-              private generalService: GeneralService,
-              private validatorsgeneral: Validatorsgeneral,
-              private renderer: Renderer2) { }
+    private cie10Service: Cie10Service,
+    private generalService: GeneralService,
+    private validatorsgeneral: Validatorsgeneral,
+    private renderer: Renderer2) { }
   form = this.validatorsgeneral.form;
   ngOnInit() {
     this.getEstudiantes();
@@ -58,7 +59,8 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
     this.getGeneral();
   }
   ngAfterViewInit() {
-      this.offButton();
+    this.offButton();
+    this.offButtonCie10();
   }
 
   // DOM
@@ -67,6 +69,12 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
   }
   onButton() {
     this.renderer.removeAttribute(this.onOffButton1.nativeElement, 'disabled');
+  }
+  offButtonCie10() {
+    this.renderer.setAttribute(this.onOffButtonCie101.nativeElement, 'disabled', 'true');
+  }
+  onButtonCie10() {
+    this.renderer.removeAttribute(this.onOffButtonCie101.nativeElement, 'disabled');
   }
 
   // service
@@ -137,48 +145,62 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
     this.contador = event.target.value.length;
     if (this.contador !== 3) {
       console.log('codigo Invalido');
+      this.offButtonCie10();
     } else {
       console.log('CodigoEncontrado');
       // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.cie10Selected.length; i++) {
-        if (this.cie10Selected[i].codigo === this.cie10Buscar.cie10) {
+      for (let i = 0; i < this.arregloCie10.length; i++) {
+        if (this.arregloCie10[i].codigo === this.cie10Buscar.cie10) {
           this.encontrado = true;
-          this.cie10.idCie10 = this.cie10Selected[i].$key;
-          this.cie10.codigo = this.cie10Selected[i].codigo;
-          this.cie10.descripcion = this.cie10Selected[i].descripcion;
+          this.cie10.idCie10 = this.arregloCie10[i].$key;
+          this.cie10.codigo = this.arregloCie10[i].codigo;
+          this.cie10.descripcion = this.arregloCie10[i].descripcion;
+          this.onButtonCie10();
           break;
         }
       }
     }
     if (this.encontrado === true) {
       console.log('encontrado');
+      this.offButtonCie10();
     }
     if (this.encontrado === false) {
-      console.log('Cie Registrado');
+      console.log('Cie NO Registrado');
+      this.onButtonCie10();
     }
   }
 
 
   getCie10() {
-    this.cie10Service.getCie10().snapshotChanges().subscribe(item => {
-      this.cie10Selected = [];
-      item.forEach(element => {
-        let x = element.payload.toJSON();
-        x['$key'] = element.key;
-        this.cie10Selected.push(x as Cie10);
+    this.cie10Service.getCie10().snapshotChanges().subscribe(
+      list => {
+        this.arregloCie10 = list.map(item => {
+          return {
+            $key: item.key,
+            ...item.payload.val()
+          };
+        });
       });
-    });
   }
   /******************Guardar formulario General********************** */
   /***************************************************************** */
-  onSubmit(formGeneral: NgForm) {
-    // this.generalService.saveGeneral(formGeneral.value);
-    // this.resetForm(formGeneral);
+  onSubmit() {
+    if (this.validatorsgeneral.form.valid) {
+      if (this.validatorsgeneral.form.get('$key').value == null) {
+        this.generalService.saveGeneral(this.validatorsgeneral.form.value);
+        this.validatorsgeneral.form.reset();
+        this.validatorsgeneral.initializeFomrGroup();
+        this.close();
+      }
+    }
+  }
+  close() {
+    this.validatorsgeneral.form.reset();
+    this.validatorsgeneral.initializeFomrGroup();
   }
   resetForm(formGeneral?: NgForm) {
     if (formGeneral != null) {
       formGeneral.reset();
-      this.generalService.selectedGeneral = new General();
     }
   }
 }

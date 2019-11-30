@@ -5,6 +5,7 @@ import { EstudianteComponent } from '../estudiante.component';
 import { Validatorsestudiante } from 'src/app/validators/validatorsestudiante';
 
 import { FormControl } from '@angular/forms';
+import { Fecha } from 'src/app/validators/fecha';
 
 @Component({
   selector: 'app-formestudiante',
@@ -16,10 +17,12 @@ export class FormestudianteComponent implements OnInit {
   myDate: Date;
   constructor(private estudianteService: EstudianteService, private matDialogRef: MatDialogRef<EstudianteComponent>,
               private dialog: MatDialog,
-              private validatorsestudiante: Validatorsestudiante) { }
+              private validatorsestudiante: Validatorsestudiante,
+              private fecha: Fecha) { }
   form = this.validatorsestudiante.form;
   formatDate(e) {
-    const convertDate = new Date(e.target.value).toISOString().substring(0, 10);
+    const convertDate = new Date(e.target.value); // .toISOString().substring(0, 10);
+    console.log(convertDate);
     this.form.get('fechaN').setValue(convertDate, {
       onlyself: true
     });
@@ -36,7 +39,6 @@ export class FormestudianteComponent implements OnInit {
   onSubmit() {
     if (this.validatorsestudiante.form.valid) {
       if (this.validatorsestudiante.form.get('$key').value == null) {
-        console.log(this.validatorsestudiante.form.value);
         this.estudianteService.saveEstudiante(this.validatorsestudiante.form.value);
         this.validatorsestudiante.form.reset();
         this.validatorsestudiante.initializeFomrGroup();
@@ -55,26 +57,12 @@ export class FormestudianteComponent implements OnInit {
     this.matDialogRef.close();
   }
   onEdit(row) {
+    console.log(row);
     this.validatorsestudiante.form.setValue(row);
     const matDialogRef = new MatDialogConfig();
     matDialogRef.disableClose = true;
     matDialogRef.autoFocus = true;
     matDialogRef.width = '60px';
     this.dialog.open(FormestudianteComponent, matDialogRef);
-  }
-  formatDate1(date) {
-    const d = new Date(date);
-    const month = '' + (d.getMonth() + 1);
-    const day = '' + d.getDate();
-    const year = d.getFullYear();
-
-  /*  if (month.length < 2) {
-         const month1 = '0' + month;
-    }
-    if (day.length < 2) {
-      const day1 = '0' + day;
-    }*/
-
-    return [year, month, day].join('/');
   }
 }

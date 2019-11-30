@@ -7,13 +7,13 @@
     <mat-grid-tile>
       <mat-card>
         <mat-form-field>
-          <input matInput placeholder="$key">
+          <input matInput placeholder="$key" >
           <mat-error>
             El campo<strong>cedula</strong> es <strong>necesario</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="idEstudiante" placeholder="Id Estudiante">
+          <input matInput formControlName="idEstudiante" placeholder="Id Estudiante" [(ngModel)]="person.idEstudiante" [disabled]="true">
           <mat-error>
             El campo<strong>id estudiante</strong> es <strong>necesario</strong>
           </mat-error>
@@ -117,19 +117,19 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Antecedentes">
+    <input matInput formControlName="antecedentes" placeholder="Antecedentes">
     <mat-error>
       El campo<strong>Antecedentes</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Motivo Consulta">
+    <input matInput formControlName="motivoConsulta"  placeholder="Motivo Consulta">
     <mat-error>
       El campo<strong>Motivo Consulta</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Enfermedad Actual">
+    <input matInput formControlName="enfermedadActual"  placeholder="Enfermedad Actual">
     <mat-error>
       El campo<strong>Enfermedad Actual</strong> es <strong>necesario</strong>
     </mat-error>
@@ -142,31 +142,31 @@
     <mat-divider fxFlex="10"></mat-divider>
   </div>
   <mat-form-field>
-    <input matInput placeholder="Presion">
+    <input matInput formControlName="presion"  placeholder="Presion">
     <mat-error>
       El campo<strong>Presion</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Temperatura">
+    <input matInput formControlName="temperatura"  placeholder="Temperatura">
     <mat-error>
       El campo<strong>Temperatura</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Saturacion De oxigeno">
+    <input matInput formControlName="saturacionOxigeno"  placeholder="Saturacion De oxigeno">
     <mat-error>
       El campo<strong>Saturacion De oxigeno</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="peso">
+    <input matInput  formControlName="peso" placeholder="peso">
     <mat-error>
       El campo<strong>Peso</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Talla">
+    <input matInput  formControlName="talla" placeholder="Talla">
     <mat-error>
       El campo<strong>talla</strong> es <strong>necesario</strong>
     </mat-error>
@@ -182,39 +182,47 @@
     <h6>Ubicacion de Daño</h6>
   </mat-label>
   <br>
-  <mat-radio-group aria-label="Select an option">
+  <mat-radio-group aria-label="Select an option" formControlName="examenFisico" >
     <mat-radio-button value="cabeza">Cabeza</mat-radio-button>
     <mat-radio-button value="tronco">Tronco</mat-radio-button>
     <mat-radio-button value="extremidades">Extremidades</mat-radio-button>
   </mat-radio-group>
   <!--------------------------------------------------------------------->
-  <!----------------------------grupo 4---------------------------------->
+  <!----------------------------Cie 10---------------------------------->
   <!--------------------------------------------------------------------->
   <div class="title-group">
     <h1 class="mat-h1">Cie 10</h1>
     <mat-divider fxFlex="10"></mat-divider>
   </div>
   <mat-form-field>
-    <input matInput placeholder="idCie10">
+    <input matInput formControlName="idCie10"  [(ngModel)]="cie10.idCie10"  placeholder="idCie10">
     <mat-error>
       El campo<strong>Cie</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Codigo">
+    <input matInput  formControlName="codigo" (keyup)="onKey1($event)" [(ngModel)]="cie10Buscar.cie10"  placeholder="Codigo">
     <mat-error>
       El campo<strong>Codigo</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Descripcion">
-    <mat-error>
-      El campo<strong>Descripcion</strong> es <strong>necesario</strong>
-    </mat-error>
-  </mat-form-field>
+  <div class="d-flex justify-content-center">
+    <div class="caja">
+      <div class="hijo text-center color-white">
+        Descripcion
+      </div>
+      <div class="hijo2 text-center">
+        <h2>{{cie10.descripcion}}</h2>
+      </div>
+    </div>
+  </div>
+  <button #onOffButtonCie10 class="btn btn-primary">Add Cie10</button>
+  <br>
+  <br>
+  <br>
   <mat-form-field>
     <mat-label>Tratamineto</mat-label>
-    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
+    <textarea matInput formControlName="tratamiento" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
       cdkAutosizeMaxRows="5">
       </textarea>
     <mat-error>
@@ -223,7 +231,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Seguimiento</mat-label>
-    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
+    <textarea matInput formControlName="seguimiento" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
       cdkAutosizeMaxRows="5">
         </textarea>
     <mat-error>
@@ -232,13 +240,19 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Observaciones</mat-label>
-    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
+    <textarea matInput formControlName="observaciones" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
       cdkAutosizeMaxRows="5">
           </textarea>
     <mat-error>
       El campo<strong>Observaciones</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
+  <mat-label><h2>Estado</h2></mat-label>
+  <br>
+  <mat-radio-group formControlName="estado" placeholder="Estado">
+    <mat-radio-button value="1">Activo</mat-radio-button>
+    <mat-radio-button value="0">Inactivo</mat-radio-button>
+</mat-radio-group>
   <div class="row p-5">
     <button class="border-left-5" mat-fab color="primary" type="submit" [disabled]="form.invalid">Submit</button>
     <button class="border-5" mat-fab color="warn">Clear</button>

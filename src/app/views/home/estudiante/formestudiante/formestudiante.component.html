@@ -28,11 +28,13 @@
                     <mat-radio-button value="F">Femenino</mat-radio-button>
                 </mat-radio-group>
                 <mat-form-field>
-                    <input type="text" formControlName="fechaN" matInput [matDatepicker]="picker"  (dateChange)="formatDate($event)"  placeholder="fechaN">
+                    <input type="text" formControlName="fechaN" matInput [matDatepicker]="picker"    placeholder="fechaN">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker  ></mat-datepicker>
                     <mat-error>El campo nombre es obligatorio</mat-error>
                 </mat-form-field>
+                <mat-label><h2>Estado</h2></mat-label>
+                <br>
                 <mat-radio-group formControlName="estado">
                     <mat-radio-button value="1">Activo</mat-radio-button>
                     <mat-radio-button value="0">Inactivo</mat-radio-button>

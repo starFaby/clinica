@@ -1,6 +1,7 @@
-export class General {
+export interface General {
     $key: string;
     idEstudiante: string;
+    cedula: string;
     grupoSanguineo: string;
     antecedentes: string;
     motivoConsulta: string;
@@ -12,8 +13,10 @@ export class General {
     talla: string;
     examenFisico: string;
     idCie10: string;
+    codigo: string;
     tratamiento: string;
     seguimiento: string;
     observaciones: string;
     estado: string;
+    fechaCreacion: Date;
 }
