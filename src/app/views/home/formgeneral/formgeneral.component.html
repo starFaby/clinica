@@ -6,14 +6,9 @@
   <mat-grid-list cols="2" rowHeight="fit" style="height: 500px;" gutterSize="10px">
     <mat-grid-tile>
       <mat-card>
-        <mat-form-field>
-          <input matInput placeholder="$key" >
-          <mat-error>
-            El campo<strong>cedula</strong> es <strong>necesario</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput formControlName="idEstudiante" placeholder="Id Estudiante" [(ngModel)]="person.idEstudiante" [disabled]="true">
+          <input type="hidden" formControlName="$key" placeholder="$key" >
+        <mat-form-field [hidden]="true">
+          <input matInput formControlName="idEstudiante" placeholder="Id Estudiante" [(ngModel)]="person.idEstudiante">
           <mat-error>
             El campo<strong>id estudiante</strong> es <strong>necesario</strong>
           </mat-error>
@@ -99,7 +94,7 @@
             </div>
           </div>
         </div>
-        <button #onOffButton class="btn btn-primary">Add</button>
+        <button #onOffButton class="btn btn-primary" [routerLink]="['estudianteList']">Add</button>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
@@ -194,7 +189,7 @@
     <h1 class="mat-h1">Cie 10</h1>
     <mat-divider fxFlex="10"></mat-divider>
   </div>
-  <mat-form-field>
+  <mat-form-field [hidden]="true">
     <input matInput formControlName="idCie10"  [(ngModel)]="cie10.idCie10"  placeholder="idCie10">
     <mat-error>
       El campo<strong>Cie</strong> es <strong>necesario</strong>
@@ -206,17 +201,13 @@
       El campo<strong>Codigo</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
-  <div class="d-flex justify-content-center">
-    <div class="caja">
-      <div class="hijo text-center color-white">
-        Descripcion
-      </div>
-      <div class="hijo2 text-center">
-        <h2>{{cie10.descripcion}}</h2>
-      </div>
-    </div>
-  </div>
-  <button #onOffButtonCie10 class="btn btn-primary">Add Cie10</button>
+  <mat-form-field>
+    <input matInput  formControlName="descripcion"  [(ngModel)]="cie10.descripcion" placeholder="Descripcion">
+    <mat-error>
+      El campo<strong>descripcion</strong> es <strong>necesario</strong>
+    </mat-error>
+  </mat-form-field>
+  <button #onOffButtonCie10 class="btn btn-primary" [routerLink]="['cie10List']">Add Cie10</button>
   <br>
   <br>
   <br>

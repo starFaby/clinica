@@ -48,15 +48,16 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
   /***************************************************/
 
   constructor(private estudianteService: EstudianteService,
-    private cie10Service: Cie10Service,
-    private generalService: GeneralService,
-    private validatorsgeneral: Validatorsgeneral,
-    private renderer: Renderer2) { }
+              private cie10Service: Cie10Service,
+              private generalService: GeneralService,
+              private validatorsgeneral: Validatorsgeneral,
+              private renderer: Renderer2) { }
   form = this.validatorsgeneral.form;
   ngOnInit() {
     this.getEstudiantes();
     this.getCie10();
     this.getGeneral();
+    this.form.get('descripcion').disable();
   }
   ngAfterViewInit() {
     this.offButton();

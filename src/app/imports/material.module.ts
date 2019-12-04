@@ -7,7 +7,10 @@ import {
   MatDividerModule,
   MatCardModule,
   MatSelectModule,
-  MatChipsModule
+  MatChipsModule,
+  MatSidenavModule,
+  MatExpansionModule,
+  MatListModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 const MaterialComponents = [
@@ -28,7 +31,10 @@ const MaterialComponents = [
   MatDividerModule,
   MatCardModule,
   MatSelectModule,
-  MatChipsModule
+  MatChipsModule,
+  MatSidenavModule,
+  MatExpansionModule,
+  MatListModule
 ];
 @NgModule({
   imports: [MaterialComponents],

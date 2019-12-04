@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="controleContainer">
-        <input type="text" formControlName="$key">
+        <input type="hidden" formControlName="$key">
         <mat-form-field>
             <input type="text" formControlName="codigo" matInput placeholder="Codigo">
             <mat-error>El campo nombre es obligatorio</mat-error>
@@ -16,6 +16,7 @@
         <div class="row">
             <button mat-fab color="primary" type="submit" [disabled]="form.invalid">Submit</button>
             <button mat-fab color="warn" (click)="onReset()">Clear</button>
+            <button  mat-fab color="accent" (click)="onClose()">Close</button>
         </div>
     </div>
 </form>

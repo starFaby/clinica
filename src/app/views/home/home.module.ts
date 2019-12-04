@@ -27,6 +27,7 @@ import { Listcie10Component } from './cie10/listcie10/listcie10.component';
 import { Formcie10Component } from './cie10/formcie10/formcie10.component';
 import { Cie10Service } from 'src/app/services/cie10.service';
 import { GeneralService } from 'src/app/services/general.service';
+import { LayoutComponent } from './layout/layout.component';
 
 
 
@@ -41,8 +42,8 @@ import { GeneralService } from 'src/app/services/general.service';
     FormestudianteComponent,
     Cie10Component,
     Listcie10Component,
-    Formcie10Component
-    
+    Formcie10Component,
+    LayoutComponent
   ],
   imports: [
     CommonModule,

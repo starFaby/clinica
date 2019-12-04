@@ -55,6 +55,7 @@ export class ListestudianteComponent implements OnInit {
     this.dialog.open(FormestudianteComponent, dialogConfig);
   }
   onEdit(row) {
+    this.validatorsestudiante.initializeFomrGroup();
     this.form.setValue(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

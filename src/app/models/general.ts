@@ -14,6 +14,7 @@ export interface General {
     examenFisico: string;
     idCie10: string;
     codigo: string;
+    descripcion: string;
     tratamiento: string;
     seguimiento: string;
     observaciones: string;

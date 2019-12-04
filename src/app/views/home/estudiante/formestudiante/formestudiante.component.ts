@@ -57,12 +57,14 @@ export class FormestudianteComponent implements OnInit {
     this.matDialogRef.close();
   }
   onEdit(row) {
-    console.log(row);
     this.validatorsestudiante.form.setValue(row);
     const matDialogRef = new MatDialogConfig();
     matDialogRef.disableClose = true;
     matDialogRef.autoFocus = true;
     matDialogRef.width = '60px';
     this.dialog.open(FormestudianteComponent, matDialogRef);
+  }
+  onResetFecha() {
+    this.validatorsestudiante.form.get('fechaN').reset();
   }
 }

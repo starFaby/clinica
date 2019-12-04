@@ -2,7 +2,10 @@
     <mat-grid-list cols="2" rowHeight="300px">
         <mat-grid-tile>
             <div class="controleContainer">
-                <input type="hidden" formControlName="$key">
+                <mat-form-field [hidden]="true">
+                    <input type="text" formControlName="$key" matInput placeholder="$key">
+                    <mat-error>El campo $key es obligatorio</mat-error>
+                </mat-form-field>
                 <mat-form-field>
                     <input type="text" formControlName="cedula" matInput placeholder="cedula">
                     <mat-error>El campo nombre es obligatorio</mat-error>
@@ -42,6 +45,8 @@
                 <div class="row ">
                     <button  mat-fab color="primary" type="submit" [disabled]="form.invalid">Submit</button>
                     <button  mat-fab color="warn" (click)="onReset()">Clear</button>
+                    <button  mat-fab color="accent" (click)="onClose()">Close</button>
+                    <button  mat-fab color="primary" (click)="onResetFecha()">reset F</button>
                 </div>
             </div>
         </mat-grid-tile>

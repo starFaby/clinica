@@ -38,8 +38,6 @@ export class Listcie10Component implements OnInit {
         this.listCie10 = new MatTableDataSource(this.arreglo);
         this.listCie10.sort = this.sort;
         this.listCie10.paginator = this.paginator;
-        console.log('faby');
-        console.log(this.arreglo);
       });
   }
 
