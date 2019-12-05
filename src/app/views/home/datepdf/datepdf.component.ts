@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as jsPDF from 'jspdf';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
 import { GeneralService } from 'src/app/services/general.service';
 import { General } from 'src/app/models/general';
 import { MatTableDataSource } from '@angular/material';
@@ -11,7 +13,6 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./datepdf.component.css']
 })
 export class DatepdfComponent implements OnInit {
-  //  @ViewChild('pdfDatos', { static: false}) pdfDatos1: ElementRef;
   constructor(private generalService: GeneralService) { }
   arreglo;
   ngOnInit() {
@@ -30,12 +31,16 @@ export class DatepdfComponent implements OnInit {
   }
   showPdf() {
     const doc = new jsPDF();
-    doc.fromHTML(document.getElementById('pdfDatos'), 10, 10, { width: 190 });
-    doc.save('datos exesivos');
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.arreglo.length; i++) {
-      console.log(this.arreglo[i].fechaCreacion);
-  }
+    doc.text('Reporte Mensual', 14, 15);
+    doc.text('Reporte Mensual', 14, 18);
+    const cuerpo = [];
+    const col = ['fecha', 'cedula', 'descripcion'];
+    this.arreglo.forEach(element => {
+      const temp = [element.fechaCreacion, element.cedula, element.descripcion];
+      cuerpo.push(temp);
+    });
+    doc.autoTable(col, cuerpo);
+    doc.save('reporte mensual');
   }
 
 }

@@ -14,6 +14,7 @@ export class GeneralService {
     return this.generalList = this.firebase.list('general');
   }
   saveGeneral(general: General) {
+    console.log(general.descripcion);
     this.generalList.push({
       idEstudiante: general.idEstudiante,
       cedula: general.cedula,
@@ -29,6 +30,7 @@ export class GeneralService {
       examenFisico: general.examenFisico,
       idCie10: general.idCie10,
       codigo: general.codigo,
+      descripcion: general.descripcion,
       tratamiento: general.tratamiento,
       seguimiento: general.seguimiento,
       observaciones: general.observaciones,

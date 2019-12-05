@@ -39,8 +39,36 @@
           <mat-list-item [routerLink]="['cie10List']">Lista Cie 10</mat-list-item>
         </mat-list>
       </mat-expansion-panel>
+      <!---->
+      <!---->
+      <!---->
+      <br>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            PDF
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list role="list">
+          <mat-list-item [routerLink]="['datePdf']">Lista Cie 10</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
     </mat-accordion>
   </mat-sidenav>
+  <!---->
+  <!---->
+  <!---->
+  <br>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        PDF
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list role="list">
+      <mat-list-item [routerLink]="['datePdf']">Lista Cie 10</mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
   <!---->
   <!---->
   <!---->

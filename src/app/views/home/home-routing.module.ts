@@ -5,6 +5,7 @@ import { FormgeneralComponent } from './formgeneral/formgeneral.component';
 import { EstudianteComponent } from './estudiante/estudiante.component';
 import { ListestudianteComponent } from './estudiante/listestudiante/listestudiante.component';
 import { Listcie10Component } from './cie10/listcie10/listcie10.component';
+import { DatepdfComponent } from './datepdf/datepdf.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
     children: [
       { path: 'formularioForm', component: FormgeneralComponent },
       { path: 'estudianteList', component: ListestudianteComponent },
-      { path: 'cie10List', component: Listcie10Component }
+      { path: 'cie10List', component: Listcie10Component },
+      { path: 'datePdf', component: DatepdfComponent }
     ]
   },
   {

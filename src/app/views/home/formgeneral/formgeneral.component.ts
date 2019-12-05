@@ -33,6 +33,7 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
     direccion: '',
     genero: '',
     fechaN: '',
+    fechaNaciExtacta: '',
     estado: ''
   };
   /***************************************************/
@@ -48,16 +49,16 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
   /***************************************************/
 
   constructor(private estudianteService: EstudianteService,
-              private cie10Service: Cie10Service,
-              private generalService: GeneralService,
-              private validatorsgeneral: Validatorsgeneral,
-              private renderer: Renderer2) { }
+    private cie10Service: Cie10Service,
+    private generalService: GeneralService,
+    private validatorsgeneral: Validatorsgeneral,
+    private renderer: Renderer2) { }
   form = this.validatorsgeneral.form;
   ngOnInit() {
     this.getEstudiantes();
     this.getCie10();
     this.getGeneral();
-    this.form.get('descripcion').disable();
+    // this.form.get('descripcion').disable();
   }
   ngAfterViewInit() {
     this.offButton();
@@ -104,6 +105,7 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
             this.person.genero = 'Hombre';
           }
           this.person.fechaN = this.arregloEstudiante[i].fechaN;
+          this.person.fechaNaciExtacta = this.fechaNacimientoExtacto(this.arregloEstudiante[i].fechaN);
           this.person.estado = this.arregloEstudiante[i].estado;
           if (this.person.estado === '0') {
             this.person.estado = 'Inactivo';
@@ -187,6 +189,7 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
   /***************************************************************** */
   onSubmit() {
     if (this.validatorsgeneral.form.valid) {
+      console.log(this.validatorsgeneral.form.value);
       if (this.validatorsgeneral.form.get('$key').value == null) {
         this.generalService.saveGeneral(this.validatorsgeneral.form.value);
         this.validatorsgeneral.form.reset();
@@ -203,5 +206,21 @@ export class FormgeneralComponent implements AfterViewInit, OnInit {
     if (formGeneral != null) {
       formGeneral.reset();
     }
+  }
+  fechaNacimientoExtacto(birthdate) {
+    const fechaNacimiento = new Date(birthdate);
+    const mmNacimiento = fechaNacimiento.getMonth() + 1;
+    const ddNacimiento = fechaNacimiento.getDate();
+    const yyyyNacimiento = fechaNacimiento.getFullYear();
+    const fechaActual = new Date();
+    const mm = fechaActual.getMonth() + 1;
+    const dd = fechaActual.getDate();
+    const yyyy = fechaActual.getFullYear();
+    const haveMonth = Math.abs(mm - mmNacimiento);
+    const haveDate = Math.abs(dd - ddNacimiento);
+    const haveYear = Math.abs(yyyy - yyyyNacimiento);
+    const showFecha = `Tienes ${haveYear} años, ${haveMonth} meses y ${haveDate} dias`;
+    console.log(showFecha);
+    return showFecha;
   }
 }

@@ -80,7 +80,7 @@
               Fecha de nacimeinto Exacta
             </div>
             <div class="hijo2 text-center">
-              <h2>en proceso...</h2>
+              <h2>{{person.fechaNaciExtacta}}</h2>
             </div>
           </div>
         </div>
@@ -201,8 +201,8 @@
       El campo<strong>Codigo</strong> es <strong>necesario</strong>
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput  formControlName="descripcion"  [(ngModel)]="cie10.descripcion" placeholder="Descripcion">
+  <mat-form-field >
+    <input matInput formControlName="descripcion"  [(ngModel)]="cie10.descripcion" placeholder="Descripcion" >
     <mat-error>
       El campo<strong>descripcion</strong> es <strong>necesario</strong>
     </mat-error>
